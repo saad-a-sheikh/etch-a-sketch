@@ -1,31 +1,40 @@
 function getDimensions () {
-    // Prompt the user for the number of rows and columns
-    const rows = parseInt(prompt('Enter the number of rows for the grid:'), 10);
-    const cols = parseInt(prompt('Enter the number of columns for the grid:'), 10);
+    let rows;
+    let cols;
+    do {
+        // Variables to store the input
+        rows = parseInt(prompt('Enter the number of rows for the grid:'), 10);
+        cols = parseInt(prompt('Enter the number of columns for the grid:'), 10);
 
     // Validate and create the grid if valid numbers are provided
-    if (!isNaN(rows) && !isNaN(cols) && rows > 0 && cols > 0 && rows <= 100 && cols <= 100) {
-        createGrid(rows, cols);
-    } else {
-        alert('Invalid input. Please enter positive numbers less than or equal to 100.');
+        if (!isNaN(rows) && !isNaN(cols) && rows > 0 && cols > 0 && rows <= 100 && cols <= 100) {
+            break;
+        } else {
+            alert('Invalid input. Please enter positive numbers less than or equal to 100.');
+        }
     }
+    while (true);
+    createGrid(rows, cols);
 }
 
 function setSize (rows, cols) {
-    // Variables for storing viewport dimensions 
-    let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    let vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-
-
+    // Variables for storing container dimensions 
+    let containerWidth = 500;
+    let containerHeight = 500;
+    
     // Getting the root and CSS variables
     var root = document.querySelector(":root");
 
     // Changing the values of the CSS variables
-    root.style.setProperty("--rows", `${vw/rows}px`);
-    root.style.setProperty("--cols", `${vh/cols}px`);
+    root.style.setProperty("--rows", `${containerWidth/rows}px`);
+    root.style.setProperty("--cols", `${containerHeight/cols}px`);
 }
 
 
+// colours the grid-item that the mouse moved over
+function colour () {
+    this.classList.add("coloured");
+}
 
 // Function to create the grid
 function createGrid(rows, cols) {
@@ -38,6 +47,7 @@ function createGrid(rows, cols) {
     for (let i = 0; i < rows * cols; i++) {
         const div = document.createElement('div');
         div.classList.add('grid-item');
+        div.addEventListener("mouseover", colour)
         container.appendChild(div);
     }
 
@@ -54,4 +64,10 @@ window.onload = () => {
     const clearGrid = document.getElementById("clear");
     
     newGrid.addEventListener("click", getDimensions);
+    clearGrid.addEventListener("click", () => {
+        let items = document.querySelectorAll(".grid-item");
+        items.forEach(item => {
+            item.classList.remove("coloured");
+        })
+    })
 }

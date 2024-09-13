@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Etch a Sketch</title>
 </head>
 <body>
-    <h1>Etch a Sketch</h1>
-    <button id="new">New</button>
-    <button id="clear">Clear</button>
-    <div id="grid-container"></div>
+    <header>
+        <h1 class="handjet grey-bg text">Etch a Sketch</h1>
+        <div id="options">
+            <button id="new" class="handjet grey-bg text">New</button>
+            <button id="clear" class="handjet grey-bg text">Clear</button>
+        </div>
+    </header>
+    <div class="grey-bg" id="container-bg">
+        <div id="grid-container"></div>
+    </div>
+    <footer class="grey-bg">
+        <a href="https://github.com/saad-a-sheikh/etch-a-sketch">
+            <img src="github.png" alt="github">
+            <span class="handjet text">Saad Ahmed Sheikh</span>
+        </a>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
